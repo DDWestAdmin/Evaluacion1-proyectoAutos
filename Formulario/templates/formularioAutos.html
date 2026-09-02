@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Inscripción Registro de Autos</title>
+    <link rel="stylesheet" href="{% static 'estilos.css' %}">
+</head>
+<body>    
+    <header class="banner banner-formulario">
+        <nav class="menu" aria-label="Navegación principal">
+            <a class="logo" href="{% url 'inicio' %}">AUTOMUNDO</a>
+            <div class="menu-enlaces">
+                <a class="boton" href="{% url 'inicio' %}">Inicio</a>
+                <a class="boton boton-activo" href="{% url 'formulario_autos' %}">Registrar auto</a>
+                <a class="boton" href="{% url 'galeria_autos' %}">Galería</a>
+                <a class="boton" href="{% url 'contacto' %}">Contacto</a>
+            </div>
+        </nav>
+        <div class="banner-contenido">
+            <p class="etiqueta">NUEVO REGISTRO</p>
+            <h1>Agrega un auto al catálogo.</h1>
+        </div>
+    </header>
+    <main class="contenido-formulario">
+    <form id="formularioAutos" class="formulario-autos" action="{% url 'formulario_autos' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1>Registro de autos</h1>
+        <div class="campo-formulario">
+            <label for="marca">Marca:</label>
+            <input type="text" id="marca" name="marca" maxlength="50" required>
+        </div>
+
+        <div class="campo-formulario">
+            <label for="modelo">Modelo:</label>
+            <input type="text" id="modelo" name="modelo" maxlength="100" required>
+        </div>
+
+        <div class="campo-formulario">
+            <label for="anio">Año:</label>
+            <input type="text" id="anio" name="anio" maxlength="4" pattern="[0-9]{4}" inputmode="numeric" required>
+        </div>
+
+        <div class="campo-formulario">
+            <label for="descripcion">Descripción:</label>
+            <input type="text" id="descripcion" name="descripcion" maxlength="250" required>
+        </div>
+
+        <div class="campo-formulario">
+            <label for="imagen">Imagen del auto:</label>
+            <input type="file" id="imagen" name="imagen" accept="image/jpeg,image/png,image/gif,image/webp" required>
+        </div>
+
+        <button class="boton-registrar" type="submit">Registrar auto</button>
+    </form>
+    </main>
+    <footer class="pie-pagina">
+        <p>&copy; 2026 Automundo. Catálogo de autos.</p>
+        <a href="{% url 'contacto' %}">Conoce más sobre nosotros</a>
+    </footer>
+    <script>
+        const formulario = document.getElementById('formularioAutos');
+
+        formulario.addEventListener('submit', async function (evento) {
+            evento.preventDefault();
+
+            const respuesta = await fetch(formulario.action, {
+                method: 'POST',
+                body: new FormData(formulario),
+                headers: {'X-Requested-With': 'XMLHttpRequest'}
+            });
+            const resultado = await respuesta.json();
+
+            if (!respuesta.ok) {
+                alert(resultado.error || 'No se pudo registrar el auto.');
+                return;
+            }
+
+            const autos = JSON.parse(localStorage.getItem('autos') || '[]');
+            autos.push(resultado);
+            localStorage.setItem('autos', JSON.stringify(autos));
+            formulario.reset();
+            alert('Auto registrado correctamente.');
+        });
+    </script>
+</body>
+</html>    

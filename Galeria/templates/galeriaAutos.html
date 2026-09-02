@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Autos</title>
+    <link rel="stylesheet" href="{% static 'estilos.css' %}">
+</head>
+<body>
+    <header class="banner">
+        <nav class="menu" aria-label="Navegación principal">
+            <a class="logo" href="{% url 'inicio' %}">AUTOMUNDO</a>
+            <div class="menu-enlaces">
+                <a class="boton" href="{% url 'inicio' %}">Inicio</a>
+                <a class="boton" href="{% url 'formulario_autos' %}">Registrar auto</a>
+                <a class="boton boton-activo" href="{% url 'galeria_autos' %}">Galería</a>
+                <a class="boton" href="{% url 'contacto' %}">Contacto</a>
+            </div>
+        </nav>
+        <div class="banner-contenido">
+            <p class="etiqueta">COLECCIÓN AUTOMOTRIZ</p>
+            <h1>Una mirada más cerca a cada modelo.</h1>
+            <p class="descripcion">Explora los vehículos del catálogo y abre cada imagen para verla en detalle.</p>
+        </div>
+    </header>
+
+    <main class="contenido-galeria">
+        <div class="encabezado-galeria">
+            <div>
+                <p class="etiqueta">GALERÍA</p>
+                <h2>Modelos destacados</h2>
+            </div>
+            <span class="contador">{{ imagenes|length }} imagen{{ imagenes|length|pluralize }}</span>
+        </div>
+
+        {% if imagenes %}
+            <section class="rejilla-imagenes" aria-label="Imágenes de autos">
+                {% for imagen in imagenes %}
+                    <article class="tarjeta-imagen">
+                        <button class="abrir-modal" type="button" data-modal="modal-{{ forloop.counter }}" aria-label="Ver {{ imagen }}">
+                            <img src="{% static 'images/' %}{{ imagen }}" alt="{{ imagen }}">
+                            <span class="nombre-imagen">{{ imagen }}</span>
+                        </button>
+                    </article>
+                    <div class="modal" id="modal-{{ forloop.counter }}" role="dialog" aria-modal="true" aria-label="{{ imagen }}" hidden>
+                        <button class="cerrar-modal" type="button" aria-label="Cerrar">&times;</button>
+                        <img src="{% static 'images/' %}{{ imagen }}" alt="{{ imagen }}">
+                    </div>
+                {% endfor %}
+            </section>
+        {% else %}
+            <p class="sin-imagenes">Todavía no hay imágenes en la galería.</p>
+        {% endif %}
+    </main>
+
+    <footer class="pie-pagina">
+        <p>&copy; 2026 Automundo. Catálogo de autos.</p>
+        <a href="{% url 'contacto' %}">Conoce más sobre nosotros</a>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.abrir-modal').forEach(function (boton) {
+            const modal = document.getElementById(boton.dataset.modal);
+            const cerrar = modal.querySelector('.cerrar-modal');
+            boton.addEventListener('click', function () {
+                modal.hidden = false;
+                document.body.classList.add('modal-abierto');
+            });
+            cerrar.addEventListener('click', function () {
+                modal.hidden = true;
+                document.body.classList.remove('modal-abierto');
+            });
+            modal.addEventListener('click', function (evento) {
+                if (evento.target === modal) {
+                    modal.hidden = true;
+                    document.body.classList.remove('modal-abierto');
+                }
+            });
+        });
+        document.addEventListener('keydown', function (evento) {
+            if (evento.key === 'Escape') {
+                document.querySelectorAll('.modal:not([hidden])').forEach(function (modal) {
+                    modal.hidden = true;
+                });
+                document.body.classList.remove('modal-abierto');
+            }
+        });
+    </script>
+</body>
+</html>

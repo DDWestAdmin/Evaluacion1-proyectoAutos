@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+:root { --azul-profundo: #102a43; --turquesa: #2ca6a4; --crema: #f7f3eb; --texto: #172b3a; --blanco: #fff; }
+* { box-sizing: border-box; }
+body { min-height: 100vh; margin: 0; display: flex; flex-direction: column; background: var(--crema); color: var(--texto); font-family: 'DM Sans', sans-serif; }
+.banner { min-height: 450px; padding: 24px 7vw 70px; color: var(--blanco); background: linear-gradient(115deg, rgba(16,42,67,.98), rgba(31,111,139,.88)), radial-gradient(circle at 85% 20%, rgba(44,166,164,.8), transparent 32%), var(--azul-profundo); position: relative; overflow: hidden; }
+.menu, .banner-contenido, .contenido-contacto { max-width: 1180px; margin-inline: auto; }
+.menu { display: flex; align-items: center; justify-content: space-between; gap: 28px; position: relative; z-index: 1; }
+.logo { color: var(--blanco); font-family: 'Space Grotesk', sans-serif; font-size: 1.15rem; font-weight: 700; letter-spacing: .08em; text-decoration: none; }
+.menu-enlaces { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+.boton { padding: 10px 16px; border: 1px solid transparent; border-radius: 4px; color: var(--blanco); text-decoration: none; }
+.boton:hover, .boton-activo { border-color: rgba(255,255,255,.35); background: rgba(255,255,255,.14); }
+.banner-contenido { margin-top: 105px; position: relative; z-index: 1; }
+.etiqueta { margin: 0 0 14px; color: var(--turquesa); font-size: .76rem; font-weight: 700; letter-spacing: .16em; }
+.banner h1, .contenido-contacto h2 { margin: 0; font-family: 'Space Grotesk', sans-serif; line-height: 1.08; }
+.banner h1 { max-width: 700px; font-size: clamp(2.5rem, 6vw, 4.7rem); }
+.contenido-contacto { width: min(100% - 40px, 1180px); flex: 1; padding: 76px 0 100px; }
+.contenido-contacto h2 { max-width: 700px; color: var(--azul-profundo); font-size: clamp(2rem, 4vw, 3.4rem); }
+.contenido-contacto p:last-child { max-width: 520px; color: #506575; font-size: 1.05rem; line-height: 1.7; }
+.pie-pagina { padding: 24px 7vw; display: flex; justify-content: space-between; gap: 20px; background: var(--azul-profundo); color: rgba(255,255,255,.7); font-size: .86rem; }
+.pie-pagina p { margin: 0; }
+.pie-pagina a { color: var(--turquesa); text-decoration: none; }
+@media (max-width: 700px) { .banner { min-height: 560px; padding-inline: 20px; } .menu { align-items: flex-start; flex-direction: column; } .menu-enlaces { justify-content: flex-start; } .banner-contenido { margin-top: 85px; } .contenido-contacto { width: min(100% - 24px, 1180px); } .pie-pagina { align-items: flex-start; flex-direction: column; padding-inline: 20px; } }

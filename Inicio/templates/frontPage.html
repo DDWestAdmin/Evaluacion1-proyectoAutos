@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Autos</title>
+    <link rel="stylesheet" href="{% static 'estilos.css' %}">
+</head>
+<body>
+    <header class="banner">
+        <nav class="menu" aria-label="Navegación principal">
+            <a class="logo" href="{% url 'inicio' %}">AUTOMUNDO</a>
+            <div class="menu-enlaces">
+                <a class="boton boton-activo" href="{% url 'inicio' %}">Inicio</a>
+                <a class="boton" href="{% url 'formulario_autos' %}">Registrar auto</a>
+                <a class="boton" href="{% url 'galeria_autos' %}">Galería</a>
+                <a class="boton" href="{% url 'contacto' %}">Quienes Somos</a>
+            </div>
+        </nav>
+
+        <div class="banner-contenido">
+            <p class="etiqueta">CATÁLOGO AUTOMOTRIZ</p>
+            <h1>Encuentra el auto que te representa.</h1>
+            <p class="descripcion">Explora modelos, registra tus favoritos y descubre nuevas opciones para tu próximo viaje.</p>
+            <a class="boton boton-principal" href="{% url 'galeria_autos' %}">Explorar galería</a>
+        </div>
+    </header>
+
+    <main class="contenido-inicio">
+        <section class="presentacion">
+            <p class="etiqueta">TU PRÓXIMO DESTINO</p>
+            <h2>Todo lo que buscas, en un solo lugar.</h2>
+            <p>Consulta nuestra colección de vehículos o agrega un nuevo registro al catálogo.</p>
+        </section>
+    </main>
+
+    <footer class="pie-pagina">
+        <p>&copy; 2026 Automundo. Catálogo de autos.</p>
+        <a href="{% url 'contacto' %}">Conoce más sobre nosotros</a>
+    </footer>
+</body>
+</html>

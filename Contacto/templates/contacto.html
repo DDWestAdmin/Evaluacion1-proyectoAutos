@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Contacto | Automundo</title>
+	<link rel="stylesheet" href="{% static 'estilos.css' %}">
+</head>
+<body>
+	<header class="banner">
+		<nav class="menu" aria-label="Navegación principal">
+			<a class="logo" href="{% url 'inicio' %}">AUTOMUNDO</a>
+			<div class="menu-enlaces">
+				<a class="boton" href="{% url 'inicio' %}">Inicio</a>
+				<a class="boton" href="{% url 'formulario_autos' %}">Registrar auto</a>
+				<a class="boton" href="{% url 'galeria_autos' %}">Galería</a>
+				<a class="boton boton-activo" href="{% url 'contacto' %}">Contacto</a>
+			</div>
+		</nav>
+		<div class="banner-contenido">
+			<p class="etiqueta">AUTOMUNDO</p>
+			<h1>Conoce nuestra pasión por los autos.</h1>
+		</div>
+	</header>
+	<main class="contenido-contacto">
+		<p class="etiqueta">QUIÉNES SOMOS</p>
+		<h2>Un espacio para quienes disfrutan cada kilómetro.</h2>
+		<p>En Automundo reunimos información e imágenes de vehículos para ayudarte a descubrir tu próximo auto.</p>
+	</main>
+	<footer class="pie-pagina">
+		<p>&copy; 2026 Automundo. Catálogo de autos.</p>
+		<a href="{% url 'inicio' %}">Volver al inicio</a>
+	</footer>
+</body>
+</html>
