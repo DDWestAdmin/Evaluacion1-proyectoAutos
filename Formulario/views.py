@@ -1,5 +1,6 @@
 import os
-import uuid
+import re
+import unicodedata
 
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -30,7 +31,13 @@ def formulario_autos(request):
 
         carpeta_imagenes = settings.BASE_DIR.parent / 'Galeria' / 'static' / 'images'
         carpeta_imagenes.mkdir(parents=True, exist_ok=True)
-        nombre_imagen = f'{uuid.uuid4().hex}{extension}'
+        partes_nombre = []
+        for campo in ('modelo', 'marca', 'anio'):
+            texto = unicodedata.normalize('NFKD', datos[campo]).encode('ascii', 'ignore').decode('ascii')
+            texto = re.sub(r'[^a-zA-Z0-9]+', '-', texto).strip('-').lower()
+            partes_nombre.append(texto)
+
+        nombre_imagen = f"{'-'.join(partes_nombre)}{extension}"
         ruta_imagen = carpeta_imagenes / nombre_imagen
 
         with ruta_imagen.open('wb+') as archivo_destino:

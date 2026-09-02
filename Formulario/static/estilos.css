@@ -13,7 +13,7 @@ body {
 
 .formulario-autos {
     width: min(100%, 620px);
-    margin: 0 auto;
+    margin: 0;
     padding: 36px;
     background: #ffffff;
     border: 1px solid #d7e0e7;
@@ -41,7 +41,8 @@ body {
     font-weight: 700;
 }
 
-.campo-formulario input {
+.campo-formulario input,
+.campo-formulario textarea {
     width: 100%;
     padding: 12px 14px;
     border: 1px solid #b8c7d1;
@@ -52,7 +53,13 @@ body {
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.campo-formulario input:focus {
+.campo-formulario textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.campo-formulario input:focus,
+.campo-formulario textarea:focus {
     outline: none;
     border-color: #0b7285;
     box-shadow: 0 0 0 3px rgba(11, 114, 133, 0.15);
@@ -111,7 +118,12 @@ body {
 .banner-contenido { max-width: 1180px; margin: 85px auto 0; }
 .etiqueta { margin: 0 0 14px; color: #2ca6a4; font-size: 0.76rem; font-weight: 700; letter-spacing: 0.16em; }
 .banner h1 { max-width: 700px; margin: 0; color: #ffffff; font-family: 'Space Grotesk', 'Segoe UI', sans-serif; font-size: clamp(2.3rem, 5vw, 4.4rem); line-height: 1.08; }
-.contenido-formulario { flex: 1; }
+.contenido-formulario {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 0 20px 40px;
+}
 .pie-pagina { margin: 40px -20px -40px; padding: 24px 7vw; display: flex; justify-content: space-between; gap: 20px; background: #102a43; color: rgba(255, 255, 255, 0.7); font-size: 0.86rem; }
 .pie-pagina p { margin: 0; }
 .pie-pagina a { color: #2ca6a4; text-decoration: none; }
